@@ -18,9 +18,30 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     //TODO start
     //now for the events which should fire:
     //if we leave the password field (focus is lost) - JavaScript Method "onblur" for an input field in our case the field this.passwordField
+    this.passwordField.addEventListener("mouseout", function(){ // ist wenn man herausfährt, ohne dass man darauf geclickt hat
+       that.check();
+    });
+    this.passwordField.addEventListener("focusout",function () { // ist wenn man darauf geclickt hat und danach woanders hinclickt
+        that.check();
+    });
     //if we enter the password field (focus is set) - JavaScript Method "onfocus" for an input field - again in our case the field this.passwordField
+    this.passwordField.addEventListener("mouseenter",function () { // ist wenn die maus hineinfährt
+        that.check();
+    });
+    this.passwordField.addEventListener("focusin", function () { // ist wenn mit der Maus in die Inputbox geclickt wird
+        that.check();
+    });
     //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
+    this.passwordField.addEventListener("keyup",function () { // ist wenn eien Taste geruckt wird // immer wieder
+        that.check();
+    });
+    this.passwordField.addEventListener("keydown", function () { // ist wenn die gedrückte Taste losgelassen wird // 1mal
+        that.check();
+    })
     //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
+    this.passwordSubmitButton.addEventListener("click",function () { // ist wenn auf den button gelickt wird.
+        that.check();
+    });
 
     this.passwordField.onblur = function() {
         //the keyword "this" is always referring to its context.
@@ -30,8 +51,13 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     };
 
     //TODO implement the other events in the exact same way!
-
-
+    /*
+    Im oberen bereich deklariert
+    this.passwordField.onmouseout = function () {that.check();};
+    this.passwordField.onmouseenter = function () {that.check();};
+    this.passwordField.onkeydown = function () {that.check();};
+    this.passwordField.onkeyup = function () {that.check();};
+    */
 
 
     //TODO end
@@ -70,8 +96,13 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
      */
     this.checkForLength = function() {
         //@todo
+        if(this.passwordField.value.length >= this.minLength){
+            return true;
+        }else{
+            return false;
+        }
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        //return true; //this needs to be replaced!
     };
 
     /*
@@ -79,9 +110,15 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
      */
     this.checkForSpecialCharacters = function() {
         //@todo
+        var regex = /[!§$_.:,;]/; // wird escapted /[ ]/ und in ein array gepackt
+        if(this.passwordField.value.match(regex)){
+            return true;
+        }else{
+            return false;
+        }
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        //return true; //this needs to be replaced!
     };
 }
 
