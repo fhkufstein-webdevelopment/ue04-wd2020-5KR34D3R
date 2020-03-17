@@ -76,8 +76,13 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
      */
     this.checkForLength = function() {
         //@todo
+        if($(passwordInputFieldId).val().length >= this.minLength){
+            return true;
+        }else{
+            return false;
+        }
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        //return true; //this needs to be replaced!
     };
 
     /*
@@ -85,6 +90,12 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
      */
     this.checkForSpecialCharacters = function() {
         //@todo
+        var regex = /[!§$_.:,;]/; // wird escapted /[ ]/ und in ein array gepackt
+        if($(passwordInputFieldId).val().match(regex)){
+            return true;
+        }else{
+            return false;
+        }
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
         return true; //this needs to be replaced!
