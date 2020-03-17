@@ -8,7 +8,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.minLength = 8; //this is what we defined and what we need to consider in our length check
 
     //this attributes are set with our constructor
-    this.wrapperField = $(wrapperId);
+    this.wrapperField = $(wrapperId); // die id wird im normalen html mit einem getElemntbyId gefunden hier mit dem zeichen für die id $
     this.passwordField = $(passwordInputFieldId);
     this.passwordSubmitButton = $(passwordSubmitButtonId);
 
@@ -51,13 +51,13 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
             //if it is long enough and has a special character - everything is fine
             if(longEnough && hasSpecialChars) {
-                this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass);
-                this.passwordSubmitButton.attr('disabled', false);
+                this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass); // es wird eine Klase entfernt und wieder eine andere Klasse hinzugefügt
+                this.passwordSubmitButton.attr('disabled', false); // es wird das attribut angesprochen wenn disabled is wird es false
             } else if(!hasSpecialChars && longEnough) { //if it is long enough but it has no special character set class warning
-                this.wrapperField.removeClass(this.successClass + ' ' + this.errorClass).addClass(this.warningClass);
+                this.wrapperField.removeClass(this.successClass + ' ' + this.errorClass).addClass(this.warningClass); // es wird wieder eine klasse entfertn und wider hinzugefügt
                 this.passwordSubmitButton.attr('disabled', true);
             } else { //if it is not long enough set class error
-                this.wrapperField.removeClass(this.warningClass + ' ' + this.successClass).addClass(this.errorClass);
+                this.wrapperField.removeClass(this.warningClass + ' ' + this.successClass).addClass(this.errorClass); // und ein letzes mal wird eine klasse hinzugefüt und wieder enterfernt
                 this.passwordSubmitButton.attr('disabled', true);
             }
 
